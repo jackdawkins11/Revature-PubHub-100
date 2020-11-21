@@ -13,6 +13,12 @@ insert into book_tags values(
 	'Fantasy'
 );
 
+
+insert into book_tags values(
+	'1111111111112',
+	'J. Tolkien books'
+);
+
 insert into book_tags values(
 	'1111111111113',
 	'Fiction'
@@ -25,8 +31,9 @@ insert into book_tags values(
 
 insert into book_tags values(
 	'1111111111113',
-	'J. Tolkien books'
+	'J. Rowling books'
 );
+
 
 insert into book_tags values(
 	'1111111111114',
