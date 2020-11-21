@@ -88,5 +88,9 @@ public class Book {
 		this.content = content;
 	}
 	
+	@Override
+	public String toString() {
+		return String.format("Book: %s, %s, %s, %s", author, title, publishDate.toString(), isbn );
+	}
 	
 }

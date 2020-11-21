@@ -43,29 +43,13 @@ public class TestBookTagDAO {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}finally {
-			closeResources();
-		}
-	}
-	
-	private static void closeResources() {
-		try {
-			if (statement != null)
-				statement.close();
-		} catch (SQLException e) {
-			System.out.println("Could not close statement!");
-			e.printStackTrace();
-		}
-
-		try {
-			if (conn != null)
-				conn.close();
-		} catch (SQLException e) {
-			System.out.println("Could not close connection!");
-			e.printStackTrace();
+			DAOUtilities.closeResources(conn, statement);
 		}
 	}
 	
 	public static void main(String[] args) {
+		
+		System.out.println("Testing BookTagDAO");
 		
 		BookTagDAO bookTagDao = new BookTagDAOImpl();
 		BookDAO bookDao = new BookDAOImpl();

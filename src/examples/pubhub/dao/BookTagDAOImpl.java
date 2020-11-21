@@ -38,7 +38,7 @@ public class BookTagDAOImpl implements BookTagDAO {
 			e.printStackTrace();
 			return false;
 		}finally {
-			closeResources();
+			DAOUtilities.closeResources(connection, stmt);
 		}
 	}
 
@@ -61,7 +61,7 @@ public class BookTagDAOImpl implements BookTagDAO {
 			e.printStackTrace();
 			return false;
 		}finally {
-			closeResources();
+			DAOUtilities.closeResources(connection, stmt);
 		}
 	}
 
@@ -89,7 +89,7 @@ public class BookTagDAOImpl implements BookTagDAO {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}finally {
-			closeResources();
+			DAOUtilities.closeResources(connection, stmt);
 		}
 		return bookTags;
 	}
@@ -132,30 +132,10 @@ public class BookTagDAOImpl implements BookTagDAO {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}finally {
-			closeResources();
+			DAOUtilities.closeResources(connection, stmt);
 		}
 		
 		return books;
-	}
-
-	// Closing all resources is important, to prevent memory leaks.
-	// Ideally, you really want to close them in the reverse-order you open them
-	private void closeResources() {
-		try {
-			if (stmt != null)
-				stmt.close();
-		} catch (SQLException e) {
-			System.out.println("Could not close statement!");
-			e.printStackTrace();
-		}
-
-		try {
-			if (connection != null)
-				connection.close();
-		} catch (SQLException e) {
-			System.out.println("Could not close connection!");
-			e.printStackTrace();
-		}
 	}
 
 }

@@ -14,4 +14,9 @@ public class BookTag {
 	public String getTagName() {
 		return tagName;
 	}
+	
+	@Override
+	public String toString() {
+		return "Book tag: " + tagName;
+	}
 }

@@ -66,7 +66,7 @@ public class BookDAOImpl implements BookDAO {
 		} finally {
 			// We need to make sure our statements and connections are closed, 
 			// or else we could wind up with a memory leak
-			closeResources();
+			DAOUtilities.closeResources(connection, stmt);
 		}
 		
 		// return the list of Book objects populated by the DB.
@@ -108,7 +108,7 @@ public class BookDAOImpl implements BookDAO {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {
-			closeResources();
+			DAOUtilities.closeResources(connection, stmt);
 		}
 		
 		return books;
@@ -148,7 +148,7 @@ public class BookDAOImpl implements BookDAO {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {
-			closeResources();
+			DAOUtilities.closeResources(connection, stmt);
 		}
 		
 		return books;
@@ -187,7 +187,7 @@ public class BookDAOImpl implements BookDAO {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {
-			closeResources();
+			DAOUtilities.closeResources(connection, stmt);
 		}
 		
 		return books;
@@ -223,7 +223,7 @@ public class BookDAOImpl implements BookDAO {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {
-			closeResources();
+			DAOUtilities.closeResources(connection, stmt);
 		}
 		
 		return book;
@@ -262,7 +262,7 @@ public class BookDAOImpl implements BookDAO {
 			e.printStackTrace();
 			return false;
 		} finally {
-			closeResources();
+			DAOUtilities.closeResources(connection, stmt);
 		}
 	}
 
@@ -293,7 +293,7 @@ public class BookDAOImpl implements BookDAO {
 			e.printStackTrace();
 			return false;
 		} finally {
-			closeResources();
+			DAOUtilities.closeResources(connection, stmt);
 		}
 		
 	}
@@ -320,31 +320,11 @@ public class BookDAOImpl implements BookDAO {
 			e.printStackTrace();
 			return false;
 		} finally {
-			closeResources();
+			DAOUtilities.closeResources(connection, stmt);
 		}
 	}
 
 	
 	/*------------------------------------------------------------------------------------------------*/
 
-	// Closing all resources is important, to prevent memory leaks. 
-	// Ideally, you really want to close them in the reverse-order you open them
-	private void closeResources() {
-		try {
-			if (stmt != null)
-				stmt.close();
-		} catch (SQLException e) {
-			System.out.println("Could not close statement!");
-			e.printStackTrace();
-		}
-		
-		try {
-			if (connection != null)
-				connection.close();
-		} catch (SQLException e) {
-			System.out.println("Could not close connection!");
-			e.printStackTrace();
-		}
-	}
-	
 }
