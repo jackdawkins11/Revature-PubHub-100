@@ -9,11 +9,3 @@ create table books (
   content bytea
 );
 
-insert into books values (
-  '1111111111111',          	-- id
-  'The Adventures of Steve',    -- title
-  'Russell Barron', 			-- author
-  current_date,    				-- publishDate
-  123.50,   					-- price
-  null							-- blob
-);

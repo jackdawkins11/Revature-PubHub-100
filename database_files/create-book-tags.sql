@@ -5,7 +5,3 @@ create table book_tags (
 	tag_name varchar(100)
 );
 
-insert into book_tags values(
-	'1111111111111',
-	'Fiction'
-);
