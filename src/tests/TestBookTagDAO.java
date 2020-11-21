@@ -7,19 +7,20 @@ import java.sql.SQLException;
 import java.util.List;
 
 import examples.pubhub.dao.BookDAO;
-import examples.pubhub.dao.BookDAOImpl;
 import examples.pubhub.dao.BookTagDAO;
-import examples.pubhub.dao.BookTagDAOImpl;
 import examples.pubhub.model.Book;
 import examples.pubhub.model.BookTag;
 import examples.pubhub.utilities.DAOUtilities;
 
 public class TestBookTagDAO {
-	
-	static PreparedStatement statement = null;
-	static Connection conn = null;
 
+	/*
+	 * This function prints the book_tags table.
+	 */
 	public static void printAllBookTags() {
+		
+		PreparedStatement statement = null;
+		Connection conn = null;
 		
 		try {
 			conn = DAOUtilities.getConnection();
@@ -47,12 +48,20 @@ public class TestBookTagDAO {
 		}
 	}
 	
+	/*
+	 * This function minimally tests BookTagDAO.
+	 * First, addBookTag and removeBookTag are tested by showing the contents
+	 * of the book_tags table before and after the functions are called.
+	 * The getTagsByBook and getBooksByTag methods are tested by simply
+	 * displaying there output, which can be compared with the DB.
+	 */
+	
 	public static void main(String[] args) {
 		
 		System.out.println("Testing BookTagDAO");
 		
-		BookTagDAO bookTagDao = new BookTagDAOImpl();
-		BookDAO bookDao = new BookDAOImpl();
+		BookTagDAO bookTagDao = DAOUtilities.getBookTagDAO();
+		BookDAO bookDao = DAOUtilities.getBookDAO();
 
 		Book lordOfTheRings = bookDao.getBookByISBN("1111111111112");
 		BookTag lordOfTheRingsTag = new BookTag( "Best seller" );
