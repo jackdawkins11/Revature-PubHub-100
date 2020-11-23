@@ -52,6 +52,21 @@
 		  </div>
 		</form>
 		
+		<table class="table table-striped table-hover table-responsive pubhub-datatable">
+		<thead><tr>
+			<td>Tag</td>
+			<td></td>
+		</tr></thead>
+		<tbody>
+			<c:forEach var="tag" items="${bookTags}"><tr>
+				<td><c:out value="${tag.tagName}"></c:out></td>
+				<td><form action="DeleteBookTag?isbn=${book.isbn13}&tagName=${tag.tagName}" method="post">
+					<button type="submit" class="btn btn-primary">Delete</button>
+				</form></td>
+			</tr></c:forEach>
+		</tbody>
+		</table>
+		
 		<form action="AddBookTag" method="post" class="form-horizontal">
 		
 			<input type="hidden" class="form-control" id="isbn13" name="isbn13" required="required" value="${book.isbn13 }" />

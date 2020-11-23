@@ -40,16 +40,21 @@ public class AddBookTag extends HttpServlet {
 
 		Book book = bookDAO.getBookByISBN(isbn13);
 		
+		BookTag bookTag = new BookTag(request.getParameter("tagName"));
+		
+		System.out.println("Adding book tag book=\"" + String.valueOf(book)
+		+ "\" bookTag=\"" + String.valueOf(bookTag) + "\"" );
+		
 		if(book != null) {
-			isSuccess = bookTagDAO.addBookTag(book, new BookTag(request.getParameter("tagName")));
+			isSuccess = bookTagDAO.addBookTag(book, bookTag);
 		}
 		
 		if(isSuccess){
-			request.getSession().setAttribute("message", "Book successfully updated");
+			request.getSession().setAttribute("message", "Book tag successfully added");
 			request.getSession().setAttribute("messageClass", "alert-success");
 			response.sendRedirect("ViewBookDetails?isbn13=" + isbn13);
 		}else {
-			request.getSession().setAttribute("message", "There was a problem updating this book");
+			request.getSession().setAttribute("message", "There was a problem adding this book tag");
 			request.getSession().setAttribute("messageClass", "alert-danger");
 			request.getRequestDispatcher("bookDetails.jsp").forward(request, response);
 		}
