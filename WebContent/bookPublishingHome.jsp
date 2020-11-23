@@ -22,6 +22,13 @@
 	
 		<h1>PUBHUB <small>Book Publishing</small></h1>
 		<hr class="book-primary">
+		
+		<form method="get">
+			<label for="tagInput">Filter by tag:</label>
+			<input name="tagName" id="tagInput"/>
+			<button type="submit">Filter</button>
+		</form>
+		
 
 		<table class="table table-striped table-hover table-responsive pubhub-datatable">
 			<thead>
