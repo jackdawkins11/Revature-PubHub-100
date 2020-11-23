@@ -42,6 +42,7 @@ public class ViewBookDetailsServlet extends HttpServlet {
 		BookTagDAO bookTagDAO = DAOUtilities.getBookTagDAO();
 		List<BookTag> bookTags = bookTagDAO.getTagsByBook(book);
 		
+		//Log the data being used
 		System.out.println("Rendering ViewBookDetails book=" + String.valueOf(book)
 			+" bookTags=" + String.valueOf(bookTags));
 		

@@ -27,9 +27,12 @@ public class BookPublishingServlet extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
+		//Get the DAOs
 		BookDAO dao = DAOUtilities.getBookDAO();
 		BookTagDAO bookTagDAO = DAOUtilities.getBookTagDAO();
 		
+		//bookList will contain all books if no tagName is specified
+		//or all books with the specified tag otherwise
 		List<Book> bookList = null;
 		
 		String tagName = request.getParameter("tagName");
@@ -41,6 +44,7 @@ public class BookPublishingServlet extends HttpServlet {
 			bookList = dao.getAllBooks();
 		}
 		
+		//Log the data used by the servlet
 		System.out.println("Rendering BookPublishing bookList=" + String.valueOf(bookList)
 			+ " tagName=" + String.valueOf(tagName) );
 
@@ -49,6 +53,10 @@ public class BookPublishingServlet extends HttpServlet {
 		
 		request.getRequestDispatcher("bookPublishingHome.jsp").forward(request, response);
 	}
+	
+	/*
+	 * Checks if a string is not null and contains at least one letter
+	 */
 	
 	private boolean isValidTagName( String tagName ) {
 		

@@ -44,11 +44,14 @@ public class DeleteBookTag extends HttpServlet {
 		System.out.println("Deleting book tag book=\"" + String.valueOf(book)
 		+ "\" bookTag=\"" + String.valueOf(bookTag) + "\"" );
 		
+		//If we couldn't find the specified book, display the detail page with an error message
 		if( book == null ) {
 			errorMessage(request, response);
 			return;
 		}
 		
+		//If we successfully removed the book tag, display the detail page with the specified book
+		//If not, display the detail page with an error message
 		if( bookTagDAO.removeBookTag(book, bookTag) ) {
 			successMessage( request, response, isbn );
 		}else {
@@ -67,7 +70,7 @@ public class DeleteBookTag extends HttpServlet {
 	}
 	
 	/*
-	 * Renders the bookDetails page with a success message
+	 * Renders the bookDetails page with book specified and a success message
 	 */
 	private void successMessage(HttpServletRequest request, HttpServletResponse response, String isbn13 ) throws ServletException, IOException {
 		request.getSession().setAttribute("message", "Book tag successfully deleted");

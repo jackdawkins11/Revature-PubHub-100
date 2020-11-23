@@ -32,7 +32,6 @@ public class AddBookTag extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		boolean isSuccess = false;
 		String isbn13 = request.getParameter("isbn13");
 		
 		BookDAO bookDAO = DAOUtilities.getBookDAO();
@@ -42,13 +41,20 @@ public class AddBookTag extends HttpServlet {
 		
 		BookTag bookTag = new BookTag(request.getParameter("tagName"));
 		
+		//Log the data used in the servlet
 		System.out.println("Adding book tag book=\"" + String.valueOf(book)
 		+ "\" bookTag=\"" + String.valueOf(bookTag) + "\"" );
+		
+		//success will be false when book == null or we couldn't add a book tag with the given book
+		//and the given tag name
+		boolean isSuccess = false;
 		
 		if(book != null) {
 			isSuccess = bookTagDAO.addBookTag(book, bookTag);
 		}
 		
+		//On success, render the detail page for the book specified
+		//On failure, render the detail page with an error message
 		if(isSuccess){
 			request.getSession().setAttribute("message", "Book tag successfully added");
 			request.getSession().setAttribute("messageClass", "alert-success");
