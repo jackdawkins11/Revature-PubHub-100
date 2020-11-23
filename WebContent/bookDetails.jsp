@@ -20,7 +20,7 @@
 	</c:when>
 	</c:choose>
 	
-		<h1>PUBHUB <small>Book Details - ${book.isbn13 }</small></h1>
+		<h1>MYPUBHUB <small>Book Details - ${book.isbn13 }</small></h1>
 		<hr class="book-primary">
 		
 		<form action="UpdateBook" method="post" class="form-horizontal">
@@ -50,6 +50,25 @@
 		      <button type="submit" class="btn btn-info">Update</button>
 		    </div>
 		  </div>
+		</form>
+		
+		<form action="AddBookTag" method="post" class="form-horizontal">
+		
+			<input type="hidden" class="form-control" id="isbn13" name="isbn13" required="required" value="${book.isbn13 }" />
+		
+			<div class="form-group">
+		      <label for="tagName" class="col-sm-4 control-label">Tag Name</label>
+		      <div class="col-sm-5">
+		        <input type="text" class="form-control" id="tagName" name="tagName" placeholder="Tag name" required="required" />
+		      </div>
+		    </div>
+		
+			<div class="form-group">
+		      <div class="col-sm-offset-4 col-sm-1">
+		        <button type="submit" class="btn btn-info">Add</button>
+		      </div>
+		    </div>
+		
 		</form>
 
 	  </div>
