@@ -2,6 +2,8 @@ package examples.pubhub.servlets;
 
 import java.io.IOException;
 import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -32,7 +34,7 @@ public class BookPublishingServlet extends HttpServlet {
 		
 		String tagName = request.getParameter("tagName");
 		
-		if( tagName != null ) {
+		if( isValidTagName(tagName) ) {
 			BookTag bookTag = new BookTag( tagName );
 			bookList = bookTagDAO.getBooksByTag(bookTag);
 		}else {
@@ -46,5 +48,17 @@ public class BookPublishingServlet extends HttpServlet {
 		request.getSession().setAttribute("books", bookList);
 		
 		request.getRequestDispatcher("bookPublishingHome.jsp").forward(request, response);
+	}
+	
+	private boolean isValidTagName( String tagName ) {
+		
+		if( tagName == null ) {
+			return false;
+		}
+		
+		Pattern pattern = Pattern.compile("[A-Za-z]+");
+		Matcher matcher = pattern.matcher(tagName);
+		
+		return matcher.find();
 	}
 }
